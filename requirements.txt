@@ -1,0 +1,8 @@
+streamlit
+opencv-python-headless
+pillow
+numpy
+pandas
+mediapipe
+tensorflow
+qrcode
