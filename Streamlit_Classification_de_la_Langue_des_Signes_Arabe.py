@@ -12,6 +12,8 @@ from PIL import Image
 import numpy as np
 import pandas as pd
 import mediapipe as mp
+import mediapipe.python.solutions.hands as mp_hands
+import mediapipe.python.solutions.drawing_utils as mp_drawing
 from tensorflow.keras.models import model_from_json
 import os
 import gdown
@@ -40,7 +42,6 @@ qr.save(buf, format="PNG")
 st.sidebar.image(buf.getvalue(), caption="Scannez pour tester sur mobile")
 st.sidebar.write("---")
 
-mp_hands = mp.solutions.hands
 hands = mp_hands.Hands(static_image_mode=True, max_num_hands=1, min_detection_confidence=0.5)
 
 nom_classe = [
