@@ -148,6 +148,21 @@ if img_file:
             st.subheader(f"Lettre : :blue[{lettre_detectee}]")
             st.write(f"Confiance : {confiance:.1f}%")
 
+            # ---  Affichage du TOP 5 ---
+            st.write("---")
+            st.markdown("##### 📊 Top 5 des prédictions :")
+            
+            # Récupérer les indices des 5 meilleures probabilités
+            top5_indices = np.argsort(preds)[-5:][::-1] 
+            
+            for i in top5_indices:
+                nom = nom_classe[i]
+                carac = mapping_arabe.get(nom, nom)
+                prob = preds[i] * 100
+                # Utilisation d'une barre de progression pour le visuel
+                st.write(f"{carac} ({nom}) : {prob:.1f}%")
+                st.progress(int(prob))
+
             # --- BOUTONS DE TRADUCTION MIS À JOUR ---
             st.write("---")
             # On récupère le vrai caractère arabe
