@@ -13,12 +13,32 @@ import numpy as np
 import pandas as pd
 import mediapipe as mp
 from tensorflow.keras.models import model_from_json
+import os
+import gdown
+import qrcode
+from io import BytesIO
 
 # --- 1. INITIALISATION ET MÉMOIRE ---
+
+
+DRIVE_FILE_ID = '1ML5JWakUnEzQrhFe0HMvnHiOYfua8tZr'
+H5_FILENAME = 'model.h5'
+JSON_FILENAME = 'model.json'
 
 # On utilise st.session_state pour que les lettres ne s'effacent pas quand la page se rafraîchit
 if 'phrase' not in st.session_state:
     st.session_state.phrase = ""
+
+# --- AJOUT DU QR CODE DANS LA SIDEBAR ---
+# Note: L'URL sera visible une fois déployé. 
+# Vous pouvez mettre une URL temporaire ou celle de votre app Streamlit Cloud.
+app_url = "https://share.streamlit.io/" 
+st.sidebar.title("Partager l'App")
+qr = qrcode.make(app_url)
+buf = BytesIO()
+qr.save(buf, format="PNG")
+st.sidebar.image(buf.getvalue(), caption="Scannez pour tester sur mobile")
+st.sidebar.write("---")
 
 mp_hands = mp.solutions.hands
 hands = mp_hands.Hands(static_image_mode=True, max_num_hands=1, min_detection_confidence=0.5)
@@ -42,12 +62,21 @@ mapping_arabe = {
 
 @st.cache_data
 def load_trained_model():
+    # Vérifier si le fichier .h5 existe, sinon le télécharger
+    if not os.path.exists(H5_FILENAME):
+        with st.spinner("Téléchargement des poids du modèle depuis Google Drive..."):
+            url = f'https://drive.google.com/uc?id={DRIVE_FILE_ID}'
+            gdown.download(url, H5_FILENAME, quiet=False)
+            
     try:
-        model = model_from_json(open('model.json').read())
-        model.load_weights('model.h5')  
+        # Chargement de l'architecture JSON (doit être sur GitHub)
+        with open(JSON_FILENAME, 'r') as f:
+            model = model_from_json(f.read())
+        # Chargement des poids
+        model.load_weights(H5_FILENAME)  
         return model
     except Exception as e:
-        st.error(f"Erreur modèle : {e}")
+        st.error(f"Erreur lors du chargement du modèle : {e}")
         return None
 
 model = load_trained_model()
