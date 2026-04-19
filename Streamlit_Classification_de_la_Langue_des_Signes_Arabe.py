@@ -156,16 +156,16 @@ if img_file:
             if st.button(f"✅ Ajouter '{caractere_arabe}' ({lettre_detectee})"):
                 # On ajoute le caractère arabe à la phrase
                 st.session_state.phrase += caractere_arabe
-                st.experimental_rerun()
+                st.rerun()
 
             col_btn1, col_btn2 = st.columns(2)
             with col_btn1:
                 if st.button("⌨️ Espace"):
                     st.session_state.phrase += " "
-                    st.experimental_rerun()
+                    st.rerun()
             with col_btn2:
                 if st.button("🗑️ Effacer"):
                     st.session_state.phrase = ""
-                    st.experimental_rerun()
+                    st.rerun()
     else:
         st.warning("Main non détectée.")
