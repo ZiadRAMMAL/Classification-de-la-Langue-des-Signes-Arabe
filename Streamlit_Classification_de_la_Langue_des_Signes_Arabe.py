@@ -34,7 +34,7 @@ if 'phrase' not in st.session_state:
 # --- AJOUT DU QR CODE DANS LA SIDEBAR ---
 # Note: L'URL sera visible une fois déployé. 
 # Vous pouvez mettre une URL temporaire ou celle de votre app Streamlit Cloud.
-app_url = "https://share.streamlit.io/" 
+app_url = "https://classification-de-la-langue-des-signes-arabe-h2stpn8kfz2aaksxd.streamlit.app/" 
 st.sidebar.title("Partager l'App")
 qr = qrcode.make(app_url)
 buf = BytesIO()
