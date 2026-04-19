@@ -1,9 +1,9 @@
 streamlit
 opencv-python-headless
 pillow
-numpy
+numpy<2.0.0
 pandas
 mediapipe==0.10.9
-tensorflow
+tensorflow==2.15.0
 gdown
 qrcode
