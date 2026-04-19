@@ -3,7 +3,7 @@ opencv-python-headless
 pillow
 numpy
 pandas
-mediapipe
+mediapipe==0.10.9
 tensorflow
 gdown
 qrcode
