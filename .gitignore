@@ -1,0 +1,15 @@
+# Python / Pycache
+__pycache__/
+*.pyc
+
+# Notebooks checkpoints
+.ipynb_checkpoints/
+
+# Fichiers de données lourdes
+data/
+*.zip
+
+# Environnements virtuels
+venv/
+.venv/
+env/
