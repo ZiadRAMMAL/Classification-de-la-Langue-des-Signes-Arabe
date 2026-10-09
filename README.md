@@ -1,28 +1,35 @@
-# 🤲 Arabic Sign Language (ArSL) Recognition App
+# 🤟 Arabic Sign Language Recognition (ARSL) using Deep Learning
 
-[![Python](https://img.shields.io/badge/Python-3.10%2B-blue.svg)](https://www.python.org/)
-[![PyTorch](https://img.shields.io/badge/PyTorch-EE4C2C?style=flat&logo=pytorch&logoColor=white)](https://pytorch.org/)
-[![TensorFlow](https://img.shields.io/badge/TensorFlow-FF6F00?style=flat&logo=tensorflow&logoColor=white)](https://www.tensorflow.org/)
-[![Streamlit](https://img.shields.io/badge/Streamlit-FF4B4B?style=flat&logo=streamlit&logoColor=white)](https://streamlit.io/)
-
-Application web interactive de reconnaissance de lettres en Langue des Signes Arabe (ArSL) basée sur le Deep Learning, conçue pour faciliter la communication et l'accessibilité.
+**Auteurs :** Ziad RAMMAL & Melissa YESGUER  
+**Cadre :** Master 2 SIA2 / EEA - Université de Toulouse  
+**Application en ligne :** [Tester l'application Streamlit](https://classification-de-la-langue-des-signes-arabe-h2stpn8kfz2aaksxd.streamlit.app/)
 
 ---
 
-## 🚀 Aperçu du Projet
-Ce projet implémente un pipeline complet de vision par ordinateur pour classifier les signes de l'alphabet arabe en temps réel ou à partir d'images statiques. Il combine l'extraction de caractéristiques et des architectures de réseaux de neurones profonds, le tout intégré dans une interface utilisateur fluide développée avec Streamlit.
+## 📌 Présentation du Projet
+Ce projet vise à traduire en temps réel les signes de l'alphabet de la langue des signes arabe (31 classes) en caractères arabes. L'application permet à l'utilisateur d'utiliser sa webcam ou de charger une image pour prédire la lettre correspondante et composer une phrase complète.
 
-## 🛠️ Stack Technique
-* **Deep Learning :** PyTorch, TensorFlow / Keras
-* **Traitement d'Image :** OpenCV, NumPy, Scikit-image
-* **Interface Utilisateur :** Streamlit
-* **Gestion de code :** Git / GitHub
+---
 
-## 📂 Structure du Dépôt
+## 📊 Résultats & Performances
+- **Modèle CNN Baseline (from scratch) :** ~51% d'accuracy (Sujet à un surapprentissage important).
+- **Modèle Transfer Learning (VGG16) + Data Augmentation :** **~96.1% d'accuracy** sur l'ensemble de test.
+- **Détection des mains :** Intégration de **MediaPipe Hands** pour le découpage automatique de la zone d'intérêt (*ROI*) avant la prédiction.
+
+---
+
+## 📁 Structure du Dépôt
 ```text
-├── data/               # Scripts de prétraitement et d'augmentation de données
-├── models/             # Définition des architectures (CNN, Transfer Learning) et poids entraînés
-├── notebooks/          # Jupyter Notebooks pour l'exploration et l'entraînement
-├── app.py              # Application principale Streamlit
-├── requirements.txt    # Dépendances du projet
-└── README.md
+.
+├── app/
+│   └── Streamlit_Classification_de_la_langue_des_signes.py  # Application Streamlit
+├── docs/
+│   └── Rapport_Classification_de_la_langue_des_signes.pdf   # Rapport détaillé
+├── models/
+│   ├── model.json                                           # Architecture du réseau
+│   └── model.h5                                             # Poids (téléchargés via Drive)
+├── notebooks/                                               # Scripts d'entraînement
+├── .gitignore
+├── packages.txt                                             # Dépendances système
+├── README.md
+└── requirements.txt                                         # Dépendances Python
