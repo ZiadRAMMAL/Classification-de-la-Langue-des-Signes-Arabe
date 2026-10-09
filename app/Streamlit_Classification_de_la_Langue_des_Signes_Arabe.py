@@ -19,13 +19,18 @@ import os
 import gdown
 import qrcode
 from io import BytesIO
+from pathlib import Path
 
 # --- 1. INITIALISATION ET MÉMOIRE ---
 
+# Définition dynamique des chemins par rapport à l'emplacement du script
+BASE_DIR = Path(__file__).resolve().parent.parent
+MODELS_DIR = BASE_DIR / "models"
+MODELS_DIR.mkdir(exist_ok=True) # S'assure que le dossier existe
 
 DRIVE_FILE_ID = '1ML5JWakUnEzQrhFe0HMvnHiOYfua8tZr'
-H5_FILENAME = 'model.h5'
-JSON_FILENAME = 'model.json'
+H5_FILENAME = MODELS_DIR / 'model.h5'
+JSON_FILENAME = MODELS_DIR / 'model.json'
 
 # On utilise st.session_state pour que les lettres ne s'effacent pas quand la page se rafraîchit
 if 'phrase' not in st.session_state:
